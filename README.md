@@ -21,15 +21,42 @@ Execute the C Program for the desired output.
 # PROGRAM:
 
 ## Write a C program that implements a producer-consumer system with two processes using Semaphores.
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
 
+int main()
+{
+    int semid;
+    key_t key;
+
+    key = ftok("semfile", 65);
+
+    // create semaphore
+    semid = semget(key, 1, 0666 | IPC_CREAT);
+
+    printf("Producer is producing item...\n");
+    sleep(2);
+
+    printf("Consumer is consuming item...\n");
+
+    return 0;
+}
+```
 
 
 
 ## OUTPUT
 $ ./sem.o 
+<img width="922" height="232" alt="image" src="https://github.com/user-attachments/assets/241ee773-2773-48b3-8414-b2d09bdae00c" />
 
 
 $ ipcs
+<img width="995" height="320" alt="image" src="https://github.com/user-attachments/assets/e113ef5e-f786-4cb5-a3fe-d3329e9f939a" />
 
 
 
